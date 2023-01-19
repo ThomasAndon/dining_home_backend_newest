@@ -1,0 +1,55 @@
+syntax = "v1"
+
+info(
+	title: "type title here"
+	desc: "type desc here"
+	author: "type author here"
+	email: "type email here"
+	version: "type version here"
+)
+
+type CommonResponse {
+	Code    int         `json:"code"`
+	Message string      `json:"msg"`
+	Data    interface{} `json:"data"`
+}
+
+type BondRequest {
+	Identity string `json:"identity"`
+}
+
+// after Authorized, need JWT
+@server(
+	//	jwt: JwtAuthMW
+	middleware: GlobalMiddleware
+)
+service main{
+	
+	@handler ViewScoreboardHandler
+	post /viewscoreboard returns (CommonResponse)
+	
+}
+
+@server(
+	middleware: GlobalMiddleware
+)
+service main {
+	@handler BondHandler
+	post /bond (BondRequest) returns (CommonResponse)
+}
+
+// Open API
+@server (
+	middleware: GlobalMiddleware
+	prefix: api
+)
+service main{
+	@handler UpdateStatusHandler
+	post /updatestatus returns (CommonResponse)
+	
+	@handler MessageReceivedHandler
+	post /messagereceived returns (CommonResponse)
+	
+	@handler JoinGroupHandler
+	post /joingroup returns (CommonResponse)
+}

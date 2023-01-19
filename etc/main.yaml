@@ -1,0 +1,6 @@
+Name: main
+Host: 0.0.0.0
+Port: 8888
+JwtAuthMW:
+  AccessSecret: "bb1d7290bac527e"
+  AccessExpire: 31536000
