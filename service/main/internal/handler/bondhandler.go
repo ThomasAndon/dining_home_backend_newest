@@ -5,17 +5,24 @@ import (
 
 	"dining_home_backend_newest/service/main/internal/logic"
 	"dining_home_backend_newest/service/main/internal/svc"
+	"dining_home_backend_newest/service/main/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
 func BondHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		var req types.BondRequest
+		if err := httpx.Parse(r, &req); err != nil {
+			httpx.Error(w, err)
+			return
+		}
+
 		l := logic.NewBondLogic(r.Context(), svcCtx)
-		resp, err := l.Bond()
+		resp, err := l.Bond(&req)
 		if err != nil {
-			httpx.ErrorCtx(r.Context(), w, err)
+			httpx.Error(w, err)
 		} else {
-			httpx.OkJsonCtx(r.Context(), w, resp)
+			httpx.OkJson(w, resp)
 		}
 	}
 }

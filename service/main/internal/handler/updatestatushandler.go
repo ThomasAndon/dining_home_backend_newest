@@ -13,9 +13,9 @@ func UpdateStatusHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		l := logic.NewUpdateStatusLogic(r.Context(), svcCtx)
 		resp, err := l.UpdateStatus()
 		if err != nil {
-			httpx.ErrorCtx(r.Context(), w, err)
+			httpx.Error(w, err)
 		} else {
-			httpx.OkJsonCtx(r.Context(), w, resp)
+			httpx.OkJson(w, resp)
 		}
 	}
 }
