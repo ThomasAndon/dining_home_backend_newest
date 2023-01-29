@@ -1,6 +1,19 @@
 Name: main
 Host: 0.0.0.0
 Port: 8888
-JwtAuthMW:
-  AccessSecret: "bb1d7290bac527e"
-  AccessExpire: 31536000
+MySQl:
+  Datasource: "xx"
+Redis:
+  Addr: "175.178.221.112:6379"
+  Password: "1234"
+  DB: 0
+
+WxApp:
+  CorpId: "wwfc9c5ccc385b29d0"
+  AgentId: "1000002"
+  AppSecret: "Rl0DapBeVT6GRhC0UYUhwq-vdHJAjSDfPScysdc7lLc"
+
+
+
+
+
