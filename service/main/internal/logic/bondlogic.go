@@ -4,6 +4,7 @@ import (
 	"context"
 	"dining_home_backend_newest/service/main/internal/svc"
 	"dining_home_backend_newest/service/main/internal/types"
+	"net/http"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -22,9 +23,8 @@ func NewBondLogic(ctx context.Context, svcCtx *svc.ServiceContext) *BondLogic {
 	}
 }
 
-func (l *BondLogic) Bond(req *types.BondRequest) (resp *types.CommonResponse, err error) {
+func (l *BondLogic) Bond(req *types.BondRequest, header http.Header) (resp *types.CommonResponse, err error) {
 	// todo: add your logic here and delete this line
-	a := l.ctx.Value("mwKey")
-	print(a)
+
 	return
 }

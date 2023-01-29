@@ -18,7 +18,8 @@ func BondHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		}
 
 		l := logic.NewBondLogic(r.Context(), svcCtx)
-		resp, err := l.Bond(&req)
+		//headers := r.Header
+		resp, err := l.Bond(&req, r.Header)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {
