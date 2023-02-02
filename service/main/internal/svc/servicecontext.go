@@ -7,28 +7,30 @@ import (
 	"github.com/go-xorm/xorm"
 	"github.com/redis/go-redis/v9"
 	"github.com/zeromicro/go-zero/rest"
+	"xorm.io/core"
 )
 
 type ServiceContext struct {
 	Config           config.Config
 	GlobalMiddleware rest.Middleware
-	redis            *redis.Client
-	xorm             *xorm.Engine
+	Redis            *redis.Client
+	Xorm             *xorm.Engine
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	xEng, err := xorm.NewEngine("mysql", c.Mysql.Datasource)
+	xEng.SetTableMapper(core.NewPrefixMapper(core.SnakeMapper{}, "d_"))
 	if err != nil {
 		panic(err)
 	}
 	return &ServiceContext{
 		Config:           c,
 		GlobalMiddleware: middleware.NewGlobalMiddleware().Handle,
-		redis: redis.NewClient(&redis.Options{
+		Redis: redis.NewClient(&redis.Options{
 			Addr:     c.Redis.Addr,
 			Password: c.Redis.Password,
 			DB:       c.Redis.DB,
 		}),
-		xorm: xEng,
+		Xorm: xEng,
 	}
 }

@@ -4,6 +4,7 @@ import (
 	"context"
 	"dining_home_backend_newest/common/wxbizmsgcrypt"
 	"dining_home_backend_newest/service/main/internal/svc"
+	models "dining_home_backend_newest/service/main/model"
 	"encoding/xml"
 	"fmt"
 	"github.com/zeromicro/go-zero/core/logx"
@@ -67,6 +68,9 @@ func (l *MessageReceivedLogic) MessageReceived(r *http.Request) (resp string, er
 	} else {
 		fmt.Println("struct", msgContent)
 	}
+	// todo
+	person := models.Identity{CpwxId: msgContent.FromUsername}
+	l.svcCtx.Xorm.Get(person)
 
 	return
 }
