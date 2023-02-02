@@ -11,12 +11,12 @@ import (
 func CronJob(svcCtx *svc.ServiceContext) {
 	c := cron.New()
 	c.AddFunc("0 3 17 * * *", doTodaysWork)
-	InitContext(svcCtx)
+	InitCronContext(svcCtx)
 	go redisListen(svcCtx.Redis)
 
 }
 
-func InitContext(svcCtx *svc.ServiceContext) {
+func InitCronContext(svcCtx *svc.ServiceContext) {
 	util.InitRedisToken(svcCtx)
 }
 

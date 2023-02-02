@@ -26,6 +26,9 @@ func main() {
 
 	ctx := svc.NewServiceContext(c)
 	handler.RegisterHandlers(server, ctx)
+
+	// added
+	croner.InitCronContext(ctx)
 	go croner.CronJob(ctx)
 
 	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)

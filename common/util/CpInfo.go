@@ -21,12 +21,15 @@ func InitRedisToken(svcCtx *svc.ServiceContext) {
 	})
 }
 
-func AccessTokenProvider(corpId string, corpSecret string, forceUpdate bool) string {
+func AccessTokenProvider(forceUpdate bool) string {
 	ctx := context.Background()
 	val, e := service.Redis.Get(ctx, configAccessToken).Result()
+	corpId := service.Config.WxApp.CorpId
+	appSecret := service.Config.WxApp.AppSecret
+
 	if e == redis.Nil || forceUpdate {
 		// 缓存中没有access key ，获取更新
-		AccessToken, err := GetLatestAccessTokenToRedis(corpId, corpSecret)
+		AccessToken, err := GetLatestAccessTokenToRedis(corpId, appSecret)
 		if err != nil {
 			return ""
 		}

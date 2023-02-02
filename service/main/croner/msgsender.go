@@ -3,7 +3,17 @@ package croner
 import (
 	"dining_home_backend_newest/common/util"
 	"github.com/ricardolonga/jsongo"
+	"github.com/tidwall/gjson"
+	"github.com/zeromicro/go-zero/core/logx"
+	"io"
+	"net/http"
 	"strings"
+)
+
+const (
+	success = iota
+	token_expired
+	failed
 )
 
 func SendMsg(toUserId []string, title, content, url string) {
@@ -15,7 +25,39 @@ func SendMsg(toUserId []string, title, content, url string) {
 		Put("duplicate_check_interval", 1800)
 
 	//logx.Info(reqBody.String())
-	preparedUrl := "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=" +
-		util.AccessTokenProvider()
 
+	res := sendRequest(reqBody.String(), false)
+
+	if res == token_expired {
+		sendRequest(reqBody.String(), true)
+	}
+
+	//preparedUrl := "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=" +
+	//	util.AccessTokenProvider(false)
+
+}
+
+func sendRequest(bodyJsonString string, force bool) int {
+	preparedUrl := "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=" +
+		util.AccessTokenProvider(force)
+	body := strings.NewReader(bodyJsonString)
+	req, _ := http.NewRequest("POST", preparedUrl, body)
+	req.Header.Add("Content-Type", "application/json")
+
+	resp, err := http.DefaultClient.Do(req)
+	if nil != err {
+		return failed
+	}
+	respBody, _ := io.ReadAll(resp.Body)
+	logx.Info(string(respBody))
+	errCode := gjson.Get(string(respBody), "errcode").Int()
+	if errCode == 42001 {
+		return token_expired
+	}
+
+	if errCode == 0 {
+		return success
+	}
+
+	return failed
 }
