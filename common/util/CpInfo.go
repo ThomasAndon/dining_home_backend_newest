@@ -3,14 +3,21 @@ package util
 import (
 	"context"
 	"github.com/redis/go-redis/v9"
+	"sync"
 	"time"
 )
 
 var (
 	configAccessToken = "d:config:AccessToken"
+	oncer             sync.Once
 )
 
-func AccessTokenProvider(ctx context.Context, rc *redis.Client, corpId string, corpSecret string, forceUpdate bool) string {
+type Util struct {
+	RC *redis.Client
+}
+
+func (u *Util) AccessTokenProvider(rc *redis.Client, corpId string, corpSecret string, forceUpdate bool) string {
+	ctx := context.Background()
 	val, e := rc.Get(ctx, configAccessToken).Result()
 	if e == redis.Nil || forceUpdate {
 		// 缓存中没有access key ，获取更新
