@@ -14,7 +14,7 @@ type accessTokenResp struct {
 	ExpiresIn   int    `json:"expires_in"`
 }
 
-func getLatestAccessTokenToRedis(corpId string, appSecret string) (string, error) {
+func GetLatestAccessTokenToRedis(corpId string, appSecret string) (string, error) {
 	a := fmt.Sprintf("https://qyapi.weixin.qq.com/cgi-bin/gettoken?"+
 		"corpid=%s&corpsecret=%s", corpId, appSecret)
 	res, err := http.Get(a)
