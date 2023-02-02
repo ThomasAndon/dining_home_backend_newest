@@ -1,0 +1,39 @@
+{
+  "touser" : "TangCaitong",
+  "msgtype" : "template_card",
+  "agentid" : 1000002,
+  "template_card" : {
+    "card_type" : "button_interaction",
+    "main_title" : {
+      "title" : "在哪吃饭",
+      "desc" : "吃饭地点每日收集"
+    },
+
+    "card_action": {
+      "type": 1,
+      "url": "https://www.tando.fun/d",
+    },
+    "task_id": "XXXXXXXXXXTASK_ID",
+
+    "button_list": [
+      {
+        "text": "在家吃饭",
+        "style": 1,
+        "key": "1"
+      },
+      {
+        "text": "在外吃饭",
+        "style": 2,
+        "key": "2"
+      },
+      {
+        "text": "其他情况不一起在家吃饭",
+        "style": 4,
+        "key": "3"
+      }
+    ]
+  },
+  "enable_id_trans": 0,
+  "enable_duplicate_check": 0,
+  "duplicate_check_interval": 1800
+}
