@@ -10,9 +10,9 @@ var (
 	configAccessToken = "d:config:AccessToken"
 )
 
-func AccessTokenProvider(ctx context.Context, rc *redis.Client, corpId string, corpSecret string) string {
+func AccessTokenProvider(ctx context.Context, rc *redis.Client, corpId string, corpSecret string, forceUpdate bool) string {
 	val, e := rc.Get(ctx, configAccessToken).Result()
-	if e == redis.Nil {
+	if e == redis.Nil || forceUpdate {
 		// 缓存中没有access key ，获取更新
 		AccessToken, err := getLatestAccessTokenToRedis(corpId, corpSecret)
 		if err != nil {

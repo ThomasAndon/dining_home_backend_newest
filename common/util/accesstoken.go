@@ -8,10 +8,10 @@ import (
 )
 
 type accessTokenResp struct {
-	errCode     int    `json:"errcode"`
-	errmsg      string `json:"errmsg"`
-	accessToken string `json:"access_token"`
-	expiresIn   int    `json:"expires_in"`
+	ErrCode     int    `json:"errcode"`
+	Errmsg      string `json:"errmsg"`
+	AccessToken string `json:"access_token"`
+	ExpiresIn   int    `json:"expires_in"`
 }
 
 func getLatestAccessTokenToRedis(corpId string, appSecret string) (string, error) {
@@ -24,13 +24,18 @@ func getLatestAccessTokenToRedis(corpId string, appSecret string) (string, error
 	}
 	defer res.Body.Close()
 
-	var resp accessTokenResp
+	resp := accessTokenResp{}
 	body, err := io.ReadAll(res.Body)
 	if err != nil {
 		return "", err
 	}
+	//buf := new(strings.Builder)
+	//n, err := io.Copy(buf, res.Body)
 
-	json.Unmarshal(body, &resp)
+	err = json.Unmarshal(body, &resp)
+	if err != nil {
+		return "", err
+	}
 
-	return resp.accessToken, nil
+	return resp.AccessToken, nil
 }

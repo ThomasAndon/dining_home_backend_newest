@@ -46,7 +46,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: UpdateStatusHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodPost,
+					Method:  http.MethodGet,
 					Path:    "/messagereceived",
 					Handler: MessageReceivedHandler(serverCtx),
 				},

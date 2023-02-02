@@ -2,7 +2,13 @@ module dining_home_backend_newest
 
 go 1.19
 
-require github.com/zeromicro/go-zero v1.4.4
+require (
+	github.com/go-sql-driver/mysql v1.7.0
+	github.com/go-xorm/xorm v0.7.9
+	github.com/redis/go-redis/v9 v9.0.0-rc.4
+	github.com/sbzhu/weworkapi_golang v0.0.0-20210525081115-1799804a7c8d
+	github.com/zeromicro/go-zero v1.4.4
+)
 
 require (
 	github.com/beorn7/perks v1.0.1 // indirect
@@ -27,7 +33,6 @@ require (
 	github.com/prometheus/client_model v0.2.0 // indirect
 	github.com/prometheus/common v0.37.0 // indirect
 	github.com/prometheus/procfs v0.8.0 // indirect
-	github.com/redis/go-redis/v9 v9.0.0-rc.4 // indirect
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
 	go.opentelemetry.io/otel v1.10.0 // indirect
 	go.opentelemetry.io/otel/exporters/jaeger v1.10.0 // indirect
@@ -47,4 +52,6 @@ require (
 	google.golang.org/grpc v1.50.1 // indirect
 	google.golang.org/protobuf v1.28.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
+	xorm.io/builder v0.3.12 // indirect
+	xorm.io/core v0.7.3 // indirect
 )

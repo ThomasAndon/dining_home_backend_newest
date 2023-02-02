@@ -2,7 +2,7 @@ Name: main
 Host: 0.0.0.0
 Port: 8888
 MySQl:
-  Datasource: "xx"
+  Datasource: "root:1234@(127.0.0.1:3306)/eat?charset=utf8mb4"
 Redis:
   Addr: "175.178.221.112:6379"
   Password: "1234"

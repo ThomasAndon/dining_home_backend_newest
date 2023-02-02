@@ -11,11 +11,11 @@ import (
 func MessageReceivedHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		l := logic.NewMessageReceivedLogic(r.Context(), svcCtx)
-		resp, err := l.MessageReceived()
+		resp, err := l.MessageReceived(r)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {
-			httpx.OkJson(w, resp)
+			w.Write([]byte(resp))
 		}
 	}
 }

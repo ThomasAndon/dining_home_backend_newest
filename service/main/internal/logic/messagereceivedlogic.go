@@ -2,11 +2,10 @@ package logic
 
 import (
 	"context"
-
 	"dining_home_backend_newest/service/main/internal/svc"
-	"dining_home_backend_newest/service/main/internal/types"
-
 	"github.com/zeromicro/go-zero/core/logx"
+	"net/http"
+	"net/url"
 )
 
 type MessageReceivedLogic struct {
@@ -23,8 +22,14 @@ func NewMessageReceivedLogic(ctx context.Context, svcCtx *svc.ServiceContext) *M
 	}
 }
 
-func (l *MessageReceivedLogic) MessageReceived() (resp *types.CommonResponse, err error) {
+func (l *MessageReceivedLogic) MessageReceived(r *http.Request) (resp string, err error) {
 	// todo: add your logic here and delete this line
+	//body, e := io.ReadAll(r.Body)
+	//if e != nil {
+	//	return "", e
+	//}
+
+	print(url.ParseQuery(r.URL.RawQuery))
 
 	return
 }
