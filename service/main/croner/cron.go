@@ -3,7 +3,7 @@ package croner
 import (
 	"context"
 	"dining_home_backend_newest/common/util"
-	"dining_home_backend_newest/service/main/internal/svc"
+	"dining_home_backend_newest/service/main/internall/svc"
 	"github.com/redis/go-redis/v9"
 	"github.com/robfig/cron/v3"
 )
@@ -17,7 +17,7 @@ func CronJob(svcCtx *svc.ServiceContext) {
 }
 
 func InitContext(svcCtx *svc.ServiceContext) {
-	util.InitRedisToken(svcCtx.Redis)
+	util.InitRedisToken(svcCtx)
 }
 
 func doTodaysWork() {

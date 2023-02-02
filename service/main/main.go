@@ -5,9 +5,9 @@ import (
 	"flag"
 	"fmt"
 
-	"dining_home_backend_newest/service/main/internal/config"
-	"dining_home_backend_newest/service/main/internal/handler"
-	"dining_home_backend_newest/service/main/internal/svc"
+	"dining_home_backend_newest/service/main/internall/config"
+	"dining_home_backend_newest/service/main/internall/handler"
+	"dining_home_backend_newest/service/main/internall/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"

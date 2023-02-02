@@ -3,7 +3,7 @@ package logic
 import (
 	"context"
 	"dining_home_backend_newest/common/wxbizmsgcrypt"
-	"dining_home_backend_newest/service/main/internal/svc"
+	"dining_home_backend_newest/service/main/internall/svc"
 	models "dining_home_backend_newest/service/main/model"
 	"encoding/xml"
 	"fmt"

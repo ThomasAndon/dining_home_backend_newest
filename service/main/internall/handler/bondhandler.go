@@ -3,9 +3,9 @@ package handler
 import (
 	"net/http"
 
-	"dining_home_backend_newest/service/main/internal/logic"
-	"dining_home_backend_newest/service/main/internal/svc"
-	"dining_home_backend_newest/service/main/internal/types"
+	"dining_home_backend_newest/service/main/internall/logic"
+	"dining_home_backend_newest/service/main/internall/svc"
+	"dining_home_backend_newest/service/main/internall/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 

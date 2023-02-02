@@ -1,8 +1,8 @@
 package svc
 
 import (
-	"dining_home_backend_newest/service/main/internal/config"
-	"dining_home_backend_newest/service/main/internal/middleware"
+	"dining_home_backend_newest/service/main/internall/config"
+	"dining_home_backend_newest/service/main/internall/middleware"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/go-xorm/xorm"
 	"github.com/redis/go-redis/v9"

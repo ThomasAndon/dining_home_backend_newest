@@ -1,10 +1,8 @@
 package croner
 
 import (
-	"context"
 	"dining_home_backend_newest/common/util"
 	"github.com/ricardolonga/jsongo"
-	"net/http"
 	"strings"
 )
 
@@ -17,7 +15,7 @@ func SendMsg(toUserId []string, title, content, url string) {
 		Put("duplicate_check_interval", 1800)
 
 	//logx.Info(reqBody.String())
-	http.Post("https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token="+
-		util.AccessTokenProvider(context.Background()), "")
+	preparedUrl := "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=" +
+		util.AccessTokenProvider()
 
 }
