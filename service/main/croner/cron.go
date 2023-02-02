@@ -1,1 +1,5 @@
 package croner
+
+func CronJob() {
+
+}
