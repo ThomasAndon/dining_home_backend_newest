@@ -10,15 +10,18 @@ import (
 var (
 	configAccessToken = "d:config:AccessToken"
 	oncer             sync.Once
+	Redis             *redis.Client
 )
 
-type Util struct {
-	RC *redis.Client
+func InitRedisToken(rc *redis.Client) {
+	oncer.Do(func() {
+		Redis = rc
+	})
 }
 
-func (u *Util) AccessTokenProvider(rc *redis.Client, corpId string, corpSecret string, forceUpdate bool) string {
+func AccessTokenProvider(corpId string, corpSecret string, forceUpdate bool) string {
 	ctx := context.Background()
-	val, e := rc.Get(ctx, configAccessToken).Result()
+	val, e := Redis.Get(ctx, configAccessToken).Result()
 	if e == redis.Nil || forceUpdate {
 		// 缓存中没有access key ，获取更新
 		AccessToken, err := GetLatestAccessTokenToRedis(corpId, corpSecret)
@@ -26,7 +29,7 @@ func (u *Util) AccessTokenProvider(rc *redis.Client, corpId string, corpSecret s
 			return ""
 		}
 
-		rc.Set(ctx, configAccessToken, AccessToken, time.Minute*90)
+		Redis.Set(ctx, configAccessToken, AccessToken, time.Minute*90)
 
 		return AccessToken
 
