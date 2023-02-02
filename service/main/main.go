@@ -1,6 +1,7 @@
 package main
 
 import (
+	"dining_home_backend_newest/service/main/croner"
 	"flag"
 	"fmt"
 
@@ -25,7 +26,9 @@ func main() {
 
 	ctx := svc.NewServiceContext(c)
 	handler.RegisterHandlers(server, ctx)
+	go croner.CronJob(ctx)
 
 	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
 	server.Start()
+
 }
