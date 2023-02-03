@@ -6,11 +6,21 @@ import (
 	"dining_home_backend_newest/service/main/internall/svc"
 	"github.com/redis/go-redis/v9"
 	"github.com/robfig/cron/v3"
+	"sync"
+)
+
+var (
+	tool  *svc.ServiceContext
+	oncer sync.Once
 )
 
 func CronJob(svcCtx *svc.ServiceContext) {
+	oncer.Do(func() {
+		tool = svcCtx
+	})
 	c := cron.New()
-	c.AddFunc("0 3 17 * * *", doTodaysWork)
+	c.AddFunc("9 3 17 * * *", doTodayWork)
+	c.Start()
 	InitCronContext(svcCtx)
 	go redisListen(svcCtx.Redis)
 
@@ -20,7 +30,7 @@ func InitCronContext(svcCtx *svc.ServiceContext) {
 	util.InitRedisToken(svcCtx)
 }
 
-func doTodaysWork() {
+func doTodayWork() {
 
 }
 
